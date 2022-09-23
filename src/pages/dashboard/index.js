@@ -1,24 +1,23 @@
 import useFetch from "@hooks/useFetch";
 import endPoints from "@services/api";
 import { Chart } from "@common/Chart";
-const PRODUCT_LIMIT = 50;
+const PRODUCT_LIMIT = 100;
 const PRODUCT_OFFSET = 0
 
   export default function Dashboard() {
     const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT,PRODUCT_OFFSET));
-    console.log(products);
-
+    
     const categoryNames = products?.map((product)=>product.category);
     const categoryCount = categoryNames?.map((category)=>category.name);
     const countOccurrences = (arr) => arr.reduce((prev,curr)=>((prev[curr]=++prev[curr] || 1), prev),{});
-    console.log(categoryNames, categoryCount);
+    
 
     const data = {
       datasets:[{
         label: 'Categories',
         data: countOccurrences(categoryCount),
         borderWith:2,
-        backgroundColor:['#ffbb11','#c0c0c0','#50AF95','#f3ba2F','#f3ba22']
+        backgroundColor:['#ffbb11','#c0c0c0','#50AF95','#f3ba2F','#c1c1c1']
       }]
     }
 
